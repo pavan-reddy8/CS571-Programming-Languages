@@ -1,0 +1,204 @@
+<html>
+<head><title>Postfix Notation Calculator</title>
+
+<script language="JavaScript">
+var toggle = false;
+var init = true;
+function addChar(Obj,inputChar)
+{if(toggle==true){
+    
+    if(Obj.value == "0" && init == true){
+        Obj.value = inputChar;
+        init = false;
+    }
+    else
+        Obj.value += inputChar;
+}
+}
+
+function eq(Obj){
+    var expression = Obj.value;
+    var postfix = expression.split("");
+    var stack=[];
+    console.log(postfix);
+    postfix.forEach( function(current) {
+    if ( isOperator(current) ) {
+        var op2=stack.pop();
+        console.log(op2)
+        var op1=stack.pop();
+        console.log(op1)
+        ans = eval(parseInt(op1),current,parseInt(op2));
+        console.log(ans)
+        stack.push(ans)
+    }
+    else {
+        stack.push(current);
+    }   
+});
+    Obj.value=stack.pop();
+
+}
+function isOperator(op){
+    switch(op){
+        case'+':console.log(op)
+        case'-':
+        case'*':
+        case'/':
+        return true;
+        default:
+        return false
+    }
+
+}
+function eval(op1,op,op2){
+    switch(op){
+        case'+':return op1+op2;
+        case'-':return op1-op2;
+        case'*':return op1*op2;
+        case'/':return op1/op2;
+
+    }
+}
+function on(Obj){
+    Obj.output.value="0"
+    toggle=true;
+    init = true;
+
+}
+function off(Obj){
+    Obj.output.value=" ";
+    toggle=false;
+    
+
+}
+function clear1(Obj){
+    console.log("lol")
+    console.log(Obj.value);
+    Obj.value='0';
+    init =true;
+    stack=[];
+}
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+<h1>Postfix Calculator</h1>
+
+
+<form method="post">
+
+<table border="3" align=center>
+<tr align="center">
+<td colspan = 4>
+
+<table border="0">
+<tr>
+<td><input name="output" value=""></td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" on "
+  onClick="on(this.form)">
+</td>
+<td>
+<input type="button" value=" off "
+  onClick="off(this.form)">
+</td>
+<td>
+<input type="button" value=" 0 "
+  onClick="addChar(this.form.output,'0')">
+</td>
+<td>
+<input type="button" value=" 1 "
+  onClick="addChar(this.form.output,'1')">
+</td>
+</tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" 2 "
+  onClick="addChar(this.form.output,'2')">
+</td>
+<td>
+<input type="button" value=" 3 "
+  onClick="addChar(this.form.output,'3')">
+</td>
+<td>
+<input type="button" value=" 4 "
+  onClick="addChar(this.form.output,'4')">
+</td>
+<td>
+<input type="button" value=" 5 "
+    onClick="addChar(this.form.output,'5')">
+</td>
+</tr>
+
+<tr align=center>
+    <td>
+    <input type="button" value=" 6 "
+      onClick="addChar(this.form.output,'6')">
+    </td>
+    <td>
+    <input type="button" value=" 7 "
+      onClick="addChar(this.form.output,'7')">
+    </td>
+    <td>
+    <input type="button" value=" 8 "
+      onClick="addChar(this.form.output,'8')">
+    </td>
+    <td>
+    <input type="button" value=" 9 "
+        onClick="addChar(this.form.output,'9')">
+    </td>
+    </tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" + "
+  onClick="addChar(this.form.output,'+')">
+</td>
+<td>
+<input type="button" value=" - "
+  onClick="addChar(this.form.output,'-')">
+</td>
+<td>
+<input type="button" value=" * "
+  onClick="addChar(this.form.output,'*')">
+</td>
+<td>
+<input type="button" value=" / "
+onClick="addChar(this.form.output,'/')">
+</td>
+</tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" = "
+  onClick="eq(this.form.output)"> 
+</td>
+<td>
+<input type="button" value="clear"
+  onClick="clear1(this.form.output)"> 
+</td>
+
+</tr>
+
+
+</table>
+</form>
+
+</body>
+</html>
+
+
